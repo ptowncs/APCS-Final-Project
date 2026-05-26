@@ -11,10 +11,14 @@ public class Player {
         {"Dagger", "4"}
     };
 
-    private String armor;
+    static String[][] armory = {
+    {"Iron Helmet", "8"},
+    {"Chestplate", "25"},
+    {"Gauntlets", "10"},
+    {"Plate Leggings", "18"},
+    {"Steel Boots", "7"},
+    };
     private ArrayList<String[]> armorList = new ArrayList<>();
-
-    private money = 0;
 
     private int xp = 0;
 
@@ -34,11 +38,14 @@ public class Player {
         }
     }
     public void addWeapon(String weapon, int barrier){
-        if (meeleeWeapons.contains(weapon) &&this.xp > barrier){
+        if (meeleeWeapons.contains(weapon) && this.xp > barrier){
             this.weaponList.add(weapon);
         }
     }
 
+    public void addArmor(String[] arm){
+        // add armor if availible
+    }
     public int getDamage(){
         int damage = 2;
         for(int i = 0; i++; i < meleeWeapons.length){
@@ -50,11 +57,22 @@ public class Player {
         return damage;
     }
     public void takeDamage(Player other){
-        this.health -= other.getDamage();
+        int hitPoints = other.getDamage();
+        for(int i = 0; i < armorList.size(); i++){
+            hitPoints -= armorList.indexOf(armory.get(i))[1]
+        }
+        this.getHealth =- hitPoints;
 
     }
     public void attack(Player other){
-        
+        other.setHealth(other.getHealth() - this.getDamage());
+    }
+
+    public int getHealth(){
+        return this.health;
+    }
+    public void setHealth(int num){
+        this.health = num;
     }
 
 }

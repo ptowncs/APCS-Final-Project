@@ -56,7 +56,7 @@ public class NonPlayer{
 
     public boolean attack(Player other, double prob) {
         if(prob > this.acc_thresh){
-             other.setHealth(other.getHealth() - this.getDamage());
+             other.setHealth(Math.max(0,other.getHealth() - this.getDamage()));
              return true;
         }
         return false;

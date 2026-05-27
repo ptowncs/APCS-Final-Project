@@ -77,7 +77,7 @@ public class Player {
     }
 
     public boolean attack(NonPlayer other) {
-        other.setHealth(other.getHealth() - this.getDamage());
+        other.setHealth(Math.max(0,other.getHealth() - this.getDamage()));
         return true;
     }
 

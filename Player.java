@@ -68,7 +68,7 @@ public class Player {
         return damage;
     }
 
-    public void takeDamage(Player other) {
+    public void takeDamage(NonPlayer other) {
         int hitPoints = other.getDamage();
         for (int i = 0; i < armorList.size(); i++) {
             hitPoints -= Integer.parseInt(armorList.get(i)[1]);
@@ -76,7 +76,7 @@ public class Player {
         this.setHealth(Math.max(0, this.getHealth() - hitPoints));
     }
 
-    public void attack(Player other) {
+    public boolean attack(NonPlayer other) {
         other.setHealth(other.getHealth() - this.getDamage());
     }
 
@@ -88,7 +88,7 @@ public class Player {
         this.health = num;
     }
 
-    public void setXP(int num) {
+    public void addXP(int num) {
         this.xp += num;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class NonPlayer{
     private String weapon;
     private int health;
@@ -11,18 +13,28 @@ public class NonPlayer{
         { "Dagger", "4" }
     };
 
+    static String[][] armory = {
+        { "Iron Helmet", "8" },
+        { "Chestplate", "25" },
+        { "Gauntlets", "10" },
+        { "Plate Leggings", "18" },
+        { "Steel Boots", "7" },
+    };
+    private ArrayList<String[]> armorList = new ArrayList<>();
     
-    public NonPlayer(String weapon, int health, double accuracy, double agility){
+    public NonPlayer(String weapon, int health, double accuracy, double agility,ArrayList<String[]> armor ){
         this.weapon = weapon;
         this.health = health;
         acc_thresh = accuracy;
         dodge_thresh = agility;
+        armorList = armor;
+
     }
 
     public int getDamage() {
         int damage = 2;
-        for (int i = 0; i < weaponList.size(); i++) {
-            if (weaponList.get(i).equals(this.weapon)) {
+        for (int i = 0; i < meleeWeapons.length; i++) {
+            if (meleeWeapons[i][0].equals(this.weapon)) {
                 damage += Integer.parseInt(meleeWeapons[i][1]);
                 break;
             }
@@ -35,7 +47,7 @@ public class NonPlayer{
         for (int i = 0; i < armorList.size(); i++) {
             hitPoints -= Integer.parseInt(armorList.get(i)[1]);
         }
-        if(prob > this.acc_thresh){
+        if(prob < this.dodge_thresh){
             this.setHealth(Math.max(0, this.getHealth() - hitPoints));
             return true;
         }
@@ -43,7 +55,7 @@ public class NonPlayer{
     }
 
     public boolean attack(Player other, double prob) {
-        if(prob > this.accuracy){
+        if(prob > this.acc_thresh){
              other.setHealth(other.getHealth() - this.getDamage());
              return true;
         }
@@ -52,6 +64,9 @@ public class NonPlayer{
 
     public int getHealth(){
         return this.health;
+    }
+    public void setHealth(int num) {
+        this.health = num;
     }
 
 } 
